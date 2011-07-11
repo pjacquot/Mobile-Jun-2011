@@ -1,0 +1,77 @@
+<html>
+
+<head>
+
+<style type="text/css">
+table {
+	border-width: 1px;
+	border-spacing: 0px;
+	border-style: none;
+	border-color: gray;
+	border-collapse: collapse;
+	background-color: white;
+}
+table th {
+	border-width: 1px;
+	padding: 5px;
+	border-style: solid;
+	border-color: gray;
+	background-color: white;
+	-moz-border-radius: 0px 0px 0px 0px;
+}
+table td {
+	border-width: 1px;
+	padding: 5px;
+	border-style: solid;
+	border-color: gray;
+	background-color: white;
+	-moz-border-radius: 0px 0px 0px 0px;
+}
+.pb {
+	color: red;
+}
+</style>
+
+</head>
+
+<body>
+
+<p>Mobile Jun 2011 - <strong>Week 1 Assignment</strong></p>
+
+<p><strong>Student:</strong> pjacquot - Patrice Jacquot</p>
+
+<h1>Assignment: Picking Up Good Habits</h1>
+
+<h2>Method</h2>
+
+<p>The purpose of the assignement is to make the given web page better, to apply appropriate technologies and to use progressive enhancement, while preserving all the information and using appropriate markup.</p>
+
+<p>I will address several aspects step by step, applying progressively one at a time.</p>
+
+<a href="original/Overview.html">Web page original version</a>
+
+<h2>Step 1: Dismiss table layout in favor of CSS layout</h2>
+
+<p>At the end of this step, data in currency rates page are still displayed in a table, because this table is appropriately used for content, not for page layout. Neverthess,  we will replace this table in a next step for another reason.</p>
+
+<a href="step1/Overview.html">Web page after step 1</a>
+
+<h2>Step 2: Remove popup windows</h2>
+
+<h2>Step 3: Change table data disposition</h2>
+
+<h2>Step 3: Adjust colors</h2>
+
+<h2>Final Step: Additional refinements</h2>
+
+<p>Outgoing hyperlinks should be identifier as such.</p>
+<p>Renamed resources following conventions</p>
+
+<a href="final/index.html">Web page final version</a>
+
+<h2>Conclusions</h2>
+
+
+</body>
+
+</html>

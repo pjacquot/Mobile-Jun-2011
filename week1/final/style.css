@@ -1,0 +1,42 @@
+ul#nav1 {
+  list-style-type:none;
+  margin:1em 0;
+  padding:0;
+}
+
+ul#nav2 {
+  list-style-type:none;
+  margin:4px;
+  padding:0;
+}
+
+ul#nav2 li, ul#nav1 li {
+  border:none;
+  background-color:#333;
+  color:#fff;
+  text-align:center;
+}
+
+ul#nav1 li {
+  text-align:left;
+  margin:2px 0;
+  padding:1px 5px;
+}
+
+ul#nav2 li {
+  display:inline;
+  border-radius: 0.5em;
+  border: solid 2px black;
+  box-shadow: rgba(0,0,0,0.2) 0.5em 0.5em 0.3em;
+  text-align:center;
+}
+
+ul#nav2 li a {
+  margin:5px 0;
+  padding:10px 22px;
+}
+
+li a {
+  color: #fff;
+  text-decoration: none;
+}

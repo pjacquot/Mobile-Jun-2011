@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+<title>Mobile Jun 2011 - Week 1 Assignment (Patrice Jacquot)</title>
+</head>
+
+<body>
+
+<p>Mobile Jun 2011 - <strong>Week 1 Assignment</strong></p>
+
+<p><strong>Student:</strong> pjacquot - Patrice Jacquot</p>
+
+<h1>Assignment: Picking Up Good Habits</h1>
+
+<h2>Method</h2>
+
+<p>The purpose of the assignement is to make the given web page better, to apply appropriate technologies and to use progressive enhancement, while preserving all the information and using appropriate markup.</p>
+<p>I will address several aspects step by step, applying progressively one at a time.</p>
+
+<a href="original/Overview.html">Web pages original version</a>
+
+<h2>Step 1: Dismiss table layout in favor of CSS layout</h2>
+
+<p>In <tt>Overview.html</tt>, I replaced table layout for top and left menus with &lt;ul&gt;&lt;li&gt; and adapated CSS. In other files, I simply removed tables and added some &lt;br&gt;.</p>
+<p>I also remove <tt>spacer.gif</tt> which was used for old-school layout and <tt>menusm.jpg</tt> which was not used at all.</p>
+<p>At the end of this step, data in currency rates page are still displayed in a table, because this table is appropriately used for content, not for page layout. Neverthess, we will replace this table in a next step for another reason.</p>
+
+<a href="step1/Overview.html">Web pages after step 1</a>
+
+<h2>Step 2: Remove popup windows</h2>
+
+<p>All the JavaScript code related to the popup and popup calls are replaced by simple hyperlinks.</p>
+<p>Contents of <tt>fenetre_popup.html</tt> and <tt>promo.html</tt> are moved to <tt>rates.html</tt>, where they are meaninful.</p>
+
+<a href="step2/Overview.html">Web pages after step 2</a>
+
+<h2>Step 3: Adjust colors and rates table data disposition</h2>
+
+<p>To make the content easier to read, the yellow background is replaced by a white one. Constrast of the left and top menu is enhanced.</p>
+<p>In this step, I also onverted the table of <tt>rates.html</tt> into a definition list &lt;dl&gt;&lt;/dl&gt; and removed redundant data.</p>
+
+<a href="step3/Overview.html">Web pages after step 3</a>
+
+<h2>Step 4: Consistent navigation</h2>
+
+<p>The menus are added to each page with a meaningful title inside the page (&lt;h1&gt;&lt;/h1&gt;) and in the head (&lt;title&gt;&lt;/title&gt;).
+Stylesheet for the menu is extracted to file <tt>style.css</tt>.
+Form inputs in <tt>xchange.html</tt> and <tt>buyg.html</tt> are now linked to their labels.</p>
+
+<a href="step4/Overview.html">Web pages after step 4</a>
+
+<h2>Final Step: Additional refinements</h2>
+
+<ul>
+  <li>Moved left menu to bottom to change page layout into a vertical layout (removed absolute positions).</li>
+  <li>Remove attribute <tt>target="_blank"</tt> from "Wall Street Official Site" link.</li>
+  <li>Renamed <tt>Overview.html</tt> to <tt>index.html</tt> and pointed links from each page to it.</li>
+  <li>Applied an HTML5 consistent doctype. </li>
+</ul>
+
+<a href="final/index.html">Web page final version</a>
+
+<p>The use of CSS3 <tt>border-radius</tt> and <tt>box-shadow</tt> is an example of progressive enhancement.
+While the main buttons ("Home" and "Our Rates") show nicer on CSS3 capable browsers, they are still usable on others.</p>
+
+</body>
+
+</html>
