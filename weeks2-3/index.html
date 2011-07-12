@@ -63,9 +63,30 @@ it has the available width as it is better to avoid additional line breaks becau
 
 <a href="stepB/sample.html">Web page after step B</a>
 
-<h2>Step D: Remove doubble scrolling</h2>
+<h2>Step C: Adapt images</h2>
 
-<a href="stepD/index.html">Web page after step D: final version</a>
+<p>I converted all images to GIF format, retaining the same width and height.
+Me might as well have considered JPEG as image format for <tt>beethoven.jpg</tt> and <tt>beethoven-background.jpg</tt>
+because these pictures are photographic (e.g. high color). For example, the size of <tt>beethoven.jpg</tt>
+file has grown from 3.5KB (JPEG version) to 13.5KB (GIF version).</p>
+
+<p>Decorative and repeating <tt>music.gif</tt> icon is removed from HTML and is now set by this CSS declaration:</p>
+
+<pre>
+tbody th {
+  padding-left: 22px;
+  background-image: url("music.gif");
+  background-position: left;
+  background-repeat: no-repeat;
+  background-color: white;
+}
+</pre>
+
+<a href="stepC/sample.html">Web page after step C</a>
+
+<h2>Step D: </h2>
+
+<a href="stepC/index.html">Web page after step D: final version</a>
 
 <h2>Conclusions</h2>
 
