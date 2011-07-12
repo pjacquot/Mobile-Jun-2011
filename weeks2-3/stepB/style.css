@@ -1,0 +1,86 @@
+html, body { margin: 0; padding: 0; background-color:black;}
+
+body { padding-bottom: 2em; text-align: center; }
+
+#container {
+  width: 100%;
+  text-align: left;
+  margin: 0 auto;
+}
+
+#header {
+  color: white;
+  background-image:url("beethoven-background.jpg");
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-color:black;
+  padding: 0 1em;
+  padding-bottom:0;
+}
+
+#sidebar {
+  background-color:#baa;
+  border: 1px solid black;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding-right:2%;
+  text-align: center;
+}
+
+#sidebar ul {
+  list-style-type:none;
+  padding:0;
+}
+
+#sidebar ul li {
+  display:inline;
+  border-radius: 0.5em;
+  border: solid 2px black;
+  box-shadow: rgba(0,0,0,0.2) 0.5em 0.5em 0.3em;
+  text-align:center;
+  background: black;
+}
+
+#sidebar ul li a {
+  padding: .5em;
+  color: #fff;
+  text-decoration: none;
+}
+
+#content {
+  background-color:white;
+  margin-right: 2em;
+  margin-left: 2%;
+  margin-right: 2%;
+  border: 1px solid black;
+  padding: 2%;
+}
+
+#footer {
+  background-color:white;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding: 2em;
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+thead th {
+   background-color:#bfb;
+   text-align:center;
+}
+
+th, td {
+  border: thin gray dotted;
+  padding: 0.2em;
+}
+
+blockquote {
+  clear: both;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
