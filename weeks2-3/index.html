@@ -29,7 +29,14 @@ On various mobile browsers, the page is zoomed out and required zoom in then dou
   <li>Because <tt>beethoven.jpg</tt> height is still important for mobile devices, I moved it to the bottom of the page,
   to give room for the content without requiring the user to scroll. Smaller <tt>beethoven-background.jpg</tt> still provides
   a tiny version of the Beethoven's face to the user.</li>
-  <li>Changed the sidebar from left float to block, making the page linear.</li>
+  <li>Changed the sidebar from left float to block, making the page linear with a liquid layout.</li>
+</ul>
+
+<p>To make the table more usable on a mobile device, I've applied these adaptations:</p>
+<ul>
+  <li>The "Symphony" column header is renamed "Symphony n°" and the word Symphony is removed from following rows.</li>
+  <li>Table padding is reduced</li>
+  <li>Border tables collapse in CSS (<tt>border-collapse: collapse;</tt>) so we gain separation space between cells.</li>
 </ul>
 
 <a href="stepA/sample.html">Web page after step 1</a>
