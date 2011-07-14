@@ -84,12 +84,51 @@ tbody th {
 
 <a href="stepC/sample.html">Web page after step C</a>
 
-<h2>Step D: </h2>
+<h2>Step D: Adapt styles to different viewports</h2>
 
-<a href="stepC/index.html">Web page after step D: final version</a>
+<p>For the adaptative version of the page, I created these files:</p>
+<dl>
+  <dt><tt>beethoven-background-high.jpg</tt></dt>
+  <dd>Version of the background for the higher resolution (width > 800px)</dd>
+  <dt><tt>beethoven-background-medium.jpg</tt></dt>
+  <dd>Version of the background for the medium resolution (600px < width < 800px)</dd>
+  <dt><tt>style-base.css</tt></dt>
+  <dd>Base version of the stylesheet, always applied</dd>
+  <dt><tt>style-medium.css</tt></dt>
+  <dd>Medium version of the stylesheet, applied in addition to the base stylesheet (600px < width < 800px)</dd>
+  <dt><tt>style-high.css</tt></dt>
+  <dd>High version of the stylesheet, applied in addition to the base stylesheet (600px < width < 800px)</dd>
+</dl>
 
-<h2>Conclusions</h2>
+<p>I added the following style directives to the header of the web page. Nothing else changed in <tt>sample.html</tt>.</p>
+<pre>
+  &lt;meta name="viewport" content="width=device-width,initial-scale=1.0" /&gt;
+  &lt;link rel="stylesheet" type="text/css" href="style-base.css" /&gt;
+  &lt;link rel="stylesheet" type="text/css" href="style-medium.css" media="only all and (min-width: 600px) and (max-width: 800px)" /&gt;
+  &lt;link rel="stylesheet" type="text/css" href="style-high.css" media="only all and (min-width: 800px)" /&gt;
+  &lt;!--[if lt IE 9 & !IEMobile]&gt;
+    &lt;link rel="stylesheet" type="text/css" href="style-high.css" /&gt;
+  &lt;![endif]--&gt;
+</pre>
 
+<p>I kept the <tt>style-base.css</tt> the same as the version in step C.</p>
+
+<p>The following modifications are applied for the medium version (600 to 800px) in <tt>style-medium.css</tt>:</p>
+<ul>
+  <li>Make use of <tt>beethoven-background-medium.jpg</tt></li>
+  <li>Removed table's <tt>table-collapse</tt></li>
+  <li>Removed blockquote's <tt>clear: both</tt></li>
+</ul>
+
+<p>The following modifications are applied for the high version (> 800px) in <tt>style-high.css</tt>:</p>
+<ul>
+  <li>Make use of <tt>beethoven-background-medium.jpg</tt></li>
+  <li>Removed table's <tt>table-collapse</tt></li>
+  <li>Removed blockquote's <tt>clear: both</tt></li>
+</ul>
+
+
+<a href="stepD/sample.html">Web page after step D: final version</a>
 
 </body>
 

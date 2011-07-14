@@ -1,0 +1,144 @@
+html, body { margin: 0; padding: 0; background-color:white;}
+
+body { text-align: center; }
+
+#header {
+  position: fixed;
+  width: 100%;
+  height: 75px;
+  color: white;
+  background-image:url("beethoven-background-medium.jpg");
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-color:black;
+  padding-bottom:0;
+  background-color:black;
+}
+
+#container {
+  padding-top: 100px;
+  width: 100%;
+  text-align: left;
+  margin: 0 auto;
+}
+
+#sidebar {
+  background-color: white;
+  border: none;
+  width: 150px;
+  margin: 1em .2em 0 .2em;
+  padding: 0;
+  float: left;
+  display: inline; /* floats are handled as block elements, this is to fix 
+                      a margin collapsing bug in IE */
+}
+
+#sidebar ul {
+  list-style-type:none;
+  padding:0;
+  margin:0;
+}
+
+#sidebar ul li {
+  display: block;
+  border-radius: 1em;
+  border: solid 2px black;
+  box-shadow: rgba(0,0,0,0.2) 0.5em 0.5em 0.3em;
+  text-align:center;
+  background: black;
+  margin: 1em;
+  padding: 1em 0;
+}
+
+#sidebar ul li:hover {
+  border-color: red;
+  box-shadow: rgba(101,0,0,0.8) 0.5em 0.5em 0.3em;
+}
+
+#sidebar ul li a {
+  padding: 1em;
+  color: #fff;
+  text-decoration: none;
+}
+
+#content {
+  background-color:white;
+  margin-left: 20%;
+  margin-right: 20px;
+  border: none;
+  background-color: #eee;
+  width: 40%;
+  padding: 10px;
+}
+
+#content-aside {
+  float: right;
+  width: 50%;
+  border: 1px solid black;
+  margin: 1em .5em .5em 0;
+  border-radius: 1em;
+}
+
+#content-intro {
+  float: right;
+  border: 1px solid black;
+  width: 30%;
+  border-radius: 1em;
+}
+
+#footer {
+  background-color:white;
+  margin: 1em 0 0 .5em;
+  padding: .5em 1em;
+  border: 1px solid black;
+  border-radius: 1em;
+  width: 38%;
+}
+
+#footer ul {
+  padding: 0;
+}
+
+#footer ul li {
+  display: inline-block;
+  border-radius: 1em;
+  margin: .5em;
+  padding: .5em;
+  border: solid 2px black;
+}
+
+#footer ul li a {
+  text-decoration: none;
+  padding: .5em;
+}
+
+#footer ul li:hover {
+  color: white;
+  background-color: black;
+}
+
+table {
+  border-collapse: separate;
+}
+
+thead th {
+   background-color:#bfb;
+   text-align:center;
+}
+
+tbody th {
+  padding-left: 22px;
+  background-image: url("music.gif");
+  background-position: left;
+  background-repeat: no-repeat;
+  background-color: white;
+}
+
+th, td {
+  border: thin gray dotted;
+  padding: 0.5em;
+}
+
+blockquote {
+  clear: none;
+}
