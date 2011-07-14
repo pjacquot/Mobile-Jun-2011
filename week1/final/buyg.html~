@@ -1,9 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
- "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
-  <title>Overview - Gold and Currencies Trader Inc</title>
+  <title>Buying Gold - Gold and Currencies Trader Inc</title>
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
@@ -16,9 +15,12 @@
 
 <div id="content">
 
-  <h1>Welcome to Gold and Currencies Trader Inc</h1>
-  <p>We are trading, buying and selling currencies and gold pepites, with no commissions.</p>
-  <p>Explore our services on the left menu, and get <a href="rates.html">our rates</a> from the top menu.</p>
+  <h1>Buying Gold</h1>
+  <p>Rates: 150$/Kg</p>
+  <form action="end.html">
+    <label for="amount">Amount (in Kg):</label> <input id="amount" type="text" size="6"/><br/>
+    <input TYPE="Submit" VALUE="Buy"/>
+  </form>
 
 </div>
 

@@ -1,9 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
- "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
-  <title>Buying Gold - Gold and Currencies Trader Inc</title>
+  <title>Exchange Currencies - Gold and Currencies Trader Inc</title>
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
@@ -16,11 +15,13 @@
 
 <div id="content">
 
-  <h1>Buying Gold</h1>
-  <p>Rates: 150$/Kg</p>
+  <h1>Exchange Currencies</h1>
+
   <form action="end.html">
-    <label for="amount">Amount (in Kg):</label> <input id="amount" type="text" size="6"/><br/>
-    <input TYPE="Submit" VALUE="Buy"/>
+    <label for="amount">Amount:</label> <input id="amount" type="text" size="6"/><br/>
+    <label for="from">From:</label> <select id="from"><option>US$</option><option>Euro</option><option>Yens</option></select><br/>
+    <label for="to">To:</label> <select id="to"><option>US$</option><option>Euro</option><option>Yens</option></select><br/>
+    <input TYPE="Submit" VALUE="Proceed"/>
   </form>
 
 </div>

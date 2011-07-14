@@ -56,7 +56,7 @@ Form inputs in <tt>xchange.html</tt> and <tt>buyg.html</tt> are now linked to th
   <li>Moved left menu to bottom to change page layout into a vertical layout (removed absolute positions).</li>
   <li>Remove attribute <tt>target="_blank"</tt> from "Wall Street Official Site" link.</li>
   <li>Renamed <tt>Overview.html</tt> to <tt>index.html</tt> and pointed links from each page to it.</li>
-  <li>Applied <del>an HTML5 consistent doctype</del><ins>a XHTML Basic 1.1 doctype</ins>.</li>
+  <li>Applied an HTML5 consistent doctype. </li>
 </ul>
 
 <a href="final/index.html">Web page final version</a>

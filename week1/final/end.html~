@@ -1,13 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
- "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
-  <title>Overview - Gold and Currencies Trader Inc</title>
+  <title>Operation Completed - Gold and Currencies Trader Inc</title>
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
-
-<body>
 
 <ul id="nav2">
   <li><a href="index.html">Home</a></li>
@@ -15,11 +12,8 @@
 </ul>
 
 <div id="content">
-
-  <h1>Welcome to Gold and Currencies Trader Inc</h1>
-  <p>We are trading, buying and selling currencies and gold pepites, with no commissions.</p>
-  <p>Explore our services on the left menu, and get <a href="rates.html">our rates</a> from the top menu.</p>
-
+  <h1>Operation Completed</h1>
+  <p style="font-weight:bold">Thanks for buying at Gold and Currencies Trader Inc</p>
 </div>
 
 <ul id="nav1">
@@ -28,5 +22,4 @@
   <li><a href="http://www.nyse.com/">Wall Street Official Site</a></li>
 </ul>
 
-</body>
 </html>
