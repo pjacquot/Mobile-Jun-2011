@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+<title>Mobile Jun 2011 - Week 5 Assignment (Patrice Jacquot)</title>
+</head>
+
+<body>
+
+<p>Mobile Jun 2011 - <strong>Weeks 5 Assignment</strong></p>
+
+<p><strong>Student:</strong> pjacquot - Patrice Jacquot</p>
+
+<h1>Assignment: Optimizing A Web Page</h1>
+
+<p>During this assignment we optimize the web page and related resources for performance on mobile.</p>
+
+<a href="original/Overview.html">Web page original version</a>
+
+<h2>Step 1: Remove unused stuff</h2>
+
+<p>At first, we remove elements in HTML page that are not used for displaying it:</p>
+<ul>
+  <li>Removed <tt>&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8" /&gt;</tt>
+  and <tt>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</tt> which are redundant with information from HTTP headers.</li>
+  <li>The meta tag &lt;meta name="generator" content="I like to hand code my Web pages" /&gt;</li>
+  <li>The unused call to the jQuery library</li>
+  <li>The inline style declaration (<tt>div.imgHolder p.caption img {border-width:0; margin-right:0.5em}</tt>
+  which is already defined in <tt>imageStyles.css</tt>.</li>
+  <li>All the comments</li>
+</ul>
+
+I also replaced XHTML strict doctype with shorter HTML5 doctype <tt>&lt;!DOCTYPE html&gt;</tt> and removed html namespace declaration.
+
+<p>In CSS files, all unused selectors were removed:</p>
+<ul>
+  <li>In <tt>generalStyles.css</tt>, selectors on unused tags: <tt>table</tt>, <tt>caption</tt> and <tt>td</tt>.</li>
+  <li>The selector <tt>p.revision</tt> in <tt>generalStyles.css</tt> is unused because there is no <tt>revision</tt> class declaration in the page.</li>
+  <li>Removed most of the inline style from the div in the last imgHolder and added a reference to the same styles collection in <tt>imgStyles.css</tt>.
+  (<tt>div.imgHolder img {(...)}</tt> became <tt>div.imgHolder img, div.imgHolder div {(...)}</tt>)</li>
+</ul>
+
+<p>I also shortened the name of two images (<tt>palace-of-westminster.jpg</tt> to <tt>westminster.jpg</tt>
+and <tt>parliament-building-reichstag.jpg</tt> to <tt>reichstag.jpg</tt>.</p>
+
+<p>Nevertheless <tt>width</tt> and <tt>height</tt> declaration for each image is kept, despite it is not as critical in a non-mobile context.</p>
+
+<a href="step1/Overview.html">Web page after step 1</a>
+
+</body>
+
+</html>
