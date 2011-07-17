@@ -43,9 +43,196 @@ I also replaced XHTML strict doctype with shorter HTML5 doctype <tt>&lt;!DOCTYPE
 <p>I also shortened the name of two images (<tt>palace-of-westminster.jpg</tt> to <tt>westminster.jpg</tt>
 and <tt>parliament-building-reichstag.jpg</tt> to <tt>reichstag.jpg</tt>.</p>
 
-<p>Nevertheless <tt>width</tt> and <tt>height</tt> declaration for each image is kept, despite it is not as critical in a non-mobile context.</p>
+<p>Nevertheless <tt>width</tt> and <tt>height</tt> declaration for each image is kept, despite it is not as critical to keep it in a non-mobile context.</p>
 
 <a href="step1/Overview.html">Web page after step 1</a>
+
+<h2>Step 2: Optimize images</h2>
+
+<p>Flags in the GIF format are replaced with the SVG versions grabbed from Wikipedia (Creative Commons licence).
+SVG has the advantage to be displayed without aliasing at any resolution.
+SVG also benefits noticeably from additional compression while JPG don't.</p>
+
+<p>JPEG photos have been optimized with GIMP, using these properties:</p>
+<ul>
+  <li>Quality=70</li>
+  <li>Optimize</li>
+  <li>Smoothing=0.25</li>
+  <li>DCT Method=Floating-Point</li>
+</ul>
+<p>Images with resolutions higher than actually displayed size are sized down.</p>
+
+<a href="step2/Overview.html">Web page after step 2</a>
+
+<h2>Step 3: Regroup things</h2>
+
+<p>First of all, I regrouped the two CSS files into <tt>style.css</tt>.
+While the number of HTTP requests for this single page could be better if the CSS declarations were inlined in the HTML file,
+I choosed to keep it apart because in reality the style would be reused. Furthermore, the CSS file can be put in browser cache.</p>
+
+<p>Secondly, flags images are embedded in the stylesheet as data URI.
+To choose the best encoding between base64 and URL-Encoding, I made two files in which I concatenated the four flags to test compression with gzip.
+Intuitively we can hope that the URL encoded version will be smaller after compression depite a bigger original size.
+We can have this intuition because the compression of full text is usually more efficient than the compression of other content.</p>
+
+<table border="1">
+<caption>Images encoding size comparison</caption>
+<thead>
+  <tr>
+    <th></th>
+    <th>Base 64</th>
+    <th>URL Encoded</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+  <th>Original file</th>
+  <td><span style="color:green">5556 bytes</span> (<a href="step3/base64">base64</a>)</td>
+  <td><span style="color:red">6815 bytes</span> (<a href="step3/url-encoded">url-encoded</a>)</td>
+</tr>
+<tr>
+  <th>Compressed file</th>
+  <td><span style="color:red">2048 bytes</span> (<a href="step3/base64.gz">base64.gz</a>)</td>
+  <td><span style="color:green">1282 bytes</span> (<a href="step3/url-encoded.gz">url-encoded.gz</a>)</td>
+</tr>
+</tbody>
+</table>
+
+<p>The intuition is validated, we gain 37% by using URL encoding on SVG images!
+Using only 1.2 KB for 4 full quality country flags isn't bad.</p>
+
+<a href="step3/Overview.html">Web page after step 3</a>
+
+<p>US and UK flags are buggy under Firefox 5, but show correctly under Chrome and Opera.</p>
+
+<h2>Minification</h2>
+
+<p>Now we can minify the web page and the stylesheet to remove spaces, new lines, etc...</p>
+<p>Firstly, I minified CSS class names to one character.</p>
+
+<p>To minify <tt>style.css</tt>, I used <a href="http://tools.w3clubs.com/cssmin/">http://tools.w3clubs.com/cssmin/</a>,
+it reduced file size by 2.16%.</p>
+
+<p>To minify <tt>Overview.html</tt>, I used <a href="http://kangax.github.com/html-minifier/">http://kangax.github.com/html-minifier/</a>,
+which reduced the file by 5.81% with very aggresive optimization (quotes between attribute values are removed).</p>
+
+<a href="step4/Overview.html">Web page after step 4</a>
+
+<h2>Compression &amp; caching</h2>
+
+<p>I compress statically the web page and stylesheet with gzip with best compression level (<tt>--best</tt> parameter).</p>
+<pre>
+gzip --best Overview.html
+gzip --best style.css
+</pre>
+
+<p>The web server used is <a href="http://www.nginx.org">Nginx</a>. To enable serving precompressed files, I compiled Nginx with this option:</p>
+<pre>
+./configure --with-http_gzip_static_module
+</pre>
+<p>Then I enabled it for the specific directory of the assignement with this in Nginx configuration:</p>
+<pre>
+# Enable serving static gzipped files for W3C course
+location        /w3c/mobile/week5/final {
+ gzip_static    on;
+}
+</pre>
+
+<a href="final/Overview.html">Web page after step 5</a>
+
+<h2>Conclusions</h2>
+
+<p>The following Firebug report of the final version shows that 8 files are loaded for a total of 70.9 KB.</p>
+<p><tt>Overview.html</tt> and <tt>style.css</tt> are served in their own compressed version.</p>
+
+<img src="screenshot.png"/>
+
+<p>The following table shows the evolutions of optimizations step by step.</p>
+
+<table border="1">
+<caption>Performance evolution step by step</caption>
+<thead>
+  <tr>
+    <th>Version</th>
+    <th>Load time</th>
+    <th>HTML</th>
+    <th>JavaScript</th>
+    <th>CSS &amp; Flags</th>
+    <th>Total without photos</th>
+    <th>JPEG Photos</th>
+    <th>Total size</th>
+    <th>Resources</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+  <td>Original</td>
+  <td>984ms</td>
+  <td>6 KB</td>
+  <td>24 KB</td>
+  <td>8.2 KB</td>
+  <td>38.2 KB</td>
+  <td>191.1 KB</td>
+  <td>229.3 KB</td>
+  <td>14</td>
+</tr>
+<tr>
+  <td>Step 1</td>
+  <td>967ms</td>
+  <td>4.5 KB</td>
+  <td>/</td>
+  <td>8.0 KB</td>
+  <td>12.5 KB</td>
+  <td>191.1 KB</td>
+  <td>203.6 KB</td>
+  <td>13</td>
+</tr>
+<tr>
+  <td>Step 2</td>
+  <td>742ms</td>
+  <td>4.5 KB</td>
+  <td>/</td>
+  <td>5.7 KB</td>
+  <td>10.2 KB</td>
+  <td>191.1 KB</td>
+  <td>201.2 KB</td>
+  <td>13</td>
+</tr>
+<tr>
+  <td>Step 3</td>
+  <td>503ms</td>
+  <td>4.2 KB</td>
+  <td>/</td>
+  <td>7.9 KB</td>
+  <td>12.1 KB</td>
+  <td>67,8 KB</td>
+  <td>79.9 KB</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>Step 4</td>
+  <td>336ms</td>
+  <td>3.5 KB</td>
+  <td>/</td>
+  <td>7.7 KB</td>
+  <td>11.2 KB</td>
+  <td>67.8 KB</td>
+  <td>78.9 KB</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>Final</td>
+  <td>254ms</td>
+  <td>1.5 KB</td>
+  <td>/</td>
+  <td>1.6 KB</td>
+  <td>3.1 KB</td>
+  <td>67.8 KB</td>
+  <td>70.9 KB</td>
+  <td>8</td>
+</tr>
+</tbody>
+</table>
 
 </body>
 
