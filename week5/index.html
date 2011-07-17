@@ -43,7 +43,7 @@ I also replaced XHTML strict doctype with shorter HTML5 doctype <tt>&lt;!DOCTYPE
 <p>I also shortened the name of two images (<tt>palace-of-westminster.jpg</tt> to <tt>westminster.jpg</tt>
 and <tt>parliament-building-reichstag.jpg</tt> to <tt>reichstag.jpg</tt>.</p>
 
-<p>Nevertheless <tt>width</tt> and <tt>height</tt> declaration for each image is kept, despite it is not as critical to keep it in a non-mobile context.</p>
+<p>Nevertheless, <tt>width</tt> and <tt>height</tt> declaration for each image are kept, despite it is not as critical to keep it in a non-mobile context.</p>
 
 <a href="step1/Overview.html">Web page after step 1</a>
 
@@ -68,12 +68,13 @@ SVG also benefits noticeably from additional compression while JPG don't.</p>
 
 <p>First of all, I regrouped the two CSS files into <tt>style.css</tt>.
 While the number of HTTP requests for this single page could be better if the CSS declarations were inlined in the HTML file,
-I choosed to keep it apart because in reality the style would be reused. Furthermore, the CSS file can be put in browser cache.</p>
+I choosed to keep it apart because in reality the stylesheet would typically be reused.
+Furthermore, the CSS file can be put in browser cache and not downloaded again when the content changes.</p>
 
-<p>Secondly, flags images are embedded in the stylesheet as data URI.
+<p>Secondly, flag images are embedded in the stylesheet as data URI.
 To choose the best encoding between base64 and URL-Encoding, I made two files in which I concatenated the four flags to test compression with gzip.
-Intuitively we can hope that the URL encoded version will be smaller after compression depite a bigger original size.
-We can have this intuition because the compression of full text is usually more efficient than the compression of other content.</p>
+Intuitively, we can hope that the URL encoded version will be smaller after compression depite a bigger original size.
+We can have this intuition because the compression of full text is usually more efficient than the compression of non textual data.</p>
 
 <table border="1">
 <caption>Images encoding size comparison</caption>
@@ -98,52 +99,64 @@ We can have this intuition because the compression of full text is usually more 
 </tbody>
 </table>
 
-<p>The intuition is validated, we gain 37% by using URL encoding on SVG images!
-Using only 1.2 KB for 4 full quality country flags isn't bad.</p>
+<p>The intuition is validated, we reduce the size by 37% using URL encoding instead of base64 for SVG images !</p>
 
 <a href="step3/Overview.html">Web page after step 3</a>
 
-<p>US and UK flags are buggy under Firefox 5, but show correctly under Chrome and Opera.</p>
+<p><em>Remark:</em> USA and Australia flags are buggy under Firefox 5, but show correctly under Chrome and Opera.</p>
 
-<h2>Minification</h2>
+<h2>Step 4: Minification</h2>
 
 <p>Now we can minify the web page and the stylesheet to remove spaces, new lines, etc...</p>
-<p>Firstly, I minified CSS class names to one character.</p>
 
 <p>To minify <tt>style.css</tt>, I used <a href="http://tools.w3clubs.com/cssmin/">http://tools.w3clubs.com/cssmin/</a>,
 it reduced file size by 2.16%.</p>
 
 <p>To minify <tt>Overview.html</tt>, I used <a href="http://kangax.github.com/html-minifier/">http://kangax.github.com/html-minifier/</a>,
-which reduced the file by 5.81% with very aggresive optimization (quotes between attribute values are removed).</p>
+which reduced the file by 5.81% with very aggresive optimization (quotes between attribute values are removed which is maybe not standard).</p>
 
 <a href="step4/Overview.html">Web page after step 4</a>
 
-<h2>Compression &amp; caching</h2>
+<h2>Final step: Compression &amp; caching</h2>
 
-<p>I compress statically the web page and stylesheet with gzip with best compression level (<tt>--best</tt> parameter).</p>
+<p>The web page and stylesheet are statically compressed with gzip using the best compression level (<tt>--best</tt> parameter).</p>
 <pre>
 gzip --best Overview.html
-gzip --best style.css
+gzip --best style-1.0.css
 </pre>
 
-<p>The web server used is <a href="http://www.nginx.org">Nginx</a>. To enable serving precompressed files, I compiled Nginx with this option:</p>
+<p>The web server is <a href="http://www.nginx.org">Nginx</a>. To enable serving precompressed files, I compiled Nginx with this option:</p>
 <pre>
 ./configure --with-http_gzip_static_module
 </pre>
-<p>Then I enabled it for the specific directory of the assignement with this in Nginx configuration:</p>
+<p>Then I enabled it for the specific directory of the assignement in Nginx configuration.</p>
+
+<p>The stylesheet file is versionned (<tt>style-1.0.css</tt>) for optimal caching.
+Because we make the commitment to always update the stylesheet by incrementing its version,
+we can set it's expiration date to the end of the world of computers: 31 December 2037 !</p>
+
+<p>Nginx configuration:</p>
 <pre>
-# Enable serving static gzipped files for W3C course
-location        /w3c/mobile/week5/final {
+# W3C Mobile Web course specific configuration
+location        /w3c/mobile {
+
+ # Enable serving static gzipped files
  gzip_static    on;
+
+ # Versionned resources never expire
+ location       ~ ^/w3c/mobile/.+-\d+\.\d+\.(gif|jpg|jpeg|css|js)$ {
+  # max sets the Expires header to 31 December 2037 23:59:59 GMT, and the Cache-Control max-age to 10 years
+  expires       max;
+ }
 }
 </pre>
 
-<a href="final/Overview.html">Web page after step 5</a>
+<a href="final/Overview.html">Web page after final step</a>
 
 <h2>Conclusions</h2>
 
 <p>The following Firebug report of the final version shows that 8 files are loaded for a total of 70.9 KB.</p>
-<p><tt>Overview.html</tt> and <tt>style.css</tt> are served in their own compressed version.</p>
+<p>The <tt>Overview.html</tt> and <tt>style.css</tt> files served are the compressed versions.</p>
 
 <img src="screenshot.png"/>
 
@@ -222,7 +235,7 @@ location        /w3c/mobile/week5/final {
 </tr>
 <tr>
   <td>Final</td>
-  <td>254ms</td>
+  <td>227ms</td>
   <td>1.5 KB</td>
   <td>/</td>
   <td>1.6 KB</td>
