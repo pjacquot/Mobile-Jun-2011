@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+<title>MOBILE Version</title>
+</head>
+
+<body>
+<h1>MOBILE Version</h1>
+</body>
+
+<p>Change your version:</p>
+<form>
+<input checked="checked" type="radio" id="mobile" name="version" onclick="document.cookie='v=m'; location.reload(true)"/><label for="mobile">Mobile</label><br/>
+<input type="radio" id="tablet" name="version" onclick="document.cookie='v=t'; location.reload(true)"/><label for="tablet">Tablet</label><br/>
+<input type="radio" id="desktop" name="version" onclick="document.cookie='v=d'; location.reload(true)"/><label for="desktop">Desktop</label><br/>
+</form>
+
+</html>

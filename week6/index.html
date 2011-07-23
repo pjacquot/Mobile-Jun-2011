@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+<title>Mobile Jun 2011 - Week 6 Assignment (Patrice Jacquot)</title>
+</head>
+
+<body>
+
+<p>Mobile Jun 2011 - <strong>Weeks 6 Assignment</strong></p>
+
+<p><strong>Student:</strong> pjacquot - Patrice Jacquot</p>
+
+<h1>Assignment: Theme and Variations</h1>
+
+<p>The purpose of this assignement is to create different versions of a page and use server side techniques to effect the switch between them.</p>
+
+<p>I choosed to support 3 versions: Mobile, Tablet and Desktop. The table below shows my classification of those 3 versions.</p>
+<table border="1">
+  <thead>
+    <tr><th>Mode</th><th>Orientation</th><th>Screen size</th><th>CSS Width</th><th>Input device</th><th>Tipping rate</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Mobile</td><td>Portrait</td><td>Small</td><td>&lt; 600 px</td><td>Thumb</td><td>Slow</td></tr>
+    <tr><td>Tablet</td><td>Landscape</td><td>Medium</td><td>600 to 800 px</td><td>Fingers</td><td>Average</td></tr>
+    <tr><td>Desktop</td><td>Landscape</td><td>Large</td><td>&gt; 800 px</td><td>Keybord &amp; Mouse</td><td>Fast</td></tr>
+  </tbody>
+</table>
+
+<h2>Step 1: Server-side User-Agent detection</h2>
+
+<p>Server-side detection of the client device is made inside Nginx webserver through URL rewriting.</p>
+<p>The configuration below tells Nginx to test the user agent against two regular expressions, then to rewrite the URL if one of them matches.
+I reused the user agents defined in the PHP script for detecting mobile devices. To detect the tablets, I've found only the keywords <tt>ipad</tt>
+and <tt>tablet</tt>, unfortunately some Android devices will be mached as mobile instead of tablet.</p>
+
+<pre>
+# W3C Mobile Web course specific configuration
+location        /w3c/mobile/week6/step1 {
+
+ if ($http_user_agent ~* "android|blackberry|iphone|ipod|opera mini|avantgo|blazer|elaine|hiptop|palm|plucker|xiino|windows ce; (iemobile|ppc|smartphone)|kindle|mobile|mmp|midp|o2|pda|pocket|psp|symbian|smartphone|treo|up.browser|up.link|vodafone|wap") {
+  rewrite ^([^~]*)\.(html|jpg|jpeg)$ $1~mobile.$2 last;
+ }
+
+ if ($http_user_agent ~* "tablet|ipad") {
+  rewrite ^([^~]*)\.(html|jpg|jpeg)$ $1~tablet.$2 last;
+ }
+}
+</pre>
+
+<p>The rewriting regular expression inserts <tt>~mobile</tt> or <tt>~tablet</tt> to html in jpeg files names. I use the ~ character as a "stop" character,
+otherwise Nginx finds an infinite loop and throws an error 500; the drawback is that this does not work for any original URL containing ~.</p>
+
+<p>The URLs are rewritten as described below:</p>
+
+<table border="1">
+  <thead>
+    <tr><th>Mode (detected)</th><th>File served</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Mobile</td><td><a href="step1/index~mobile.html">index~mobile.html</a></td></tr>
+    <tr><td>Tablet</td><td><a href="step1/index~tablet.html">index~tablet.html</a></td></tr>
+    <tr><td>Desktop</td><td><a href="step1/index.html">index.html</a></td></tr>
+  </tbody>
+</table>
+
+<p>The resulting web page serves a different version depending on the user agent:</p>
+<a href="step1/">Web page after step 1</a>
+
+<h2>Step 2: Let the user override this with a cookie</h2>
+
+<p>We will enable the user to choose the version he prefers.
+To do this, we add 3 radio buttons which set a cookie then reloads current page.
+The 3 values are <tt>v=m</tt> (mobile), <tt>v=t</tt> (tablets), <tt>v=d</tt> (desktop).
+The JavaScript code doing this on button click:</p>
+
+<pre>
+&lt;input checked="checked" type="radio" id="desktop" name="version" onclick="document.cookie='v=d'; window.location.reload(true)"/&gt;
+</pre>
+<p>In it important to call the reload method with the parameter "true" to force page reloading.
+Otherwise, the browser will retrieve the resources from the cache.</p>
+
+<p>On the server side, I updated the configuration to take into account the cookie at first:</p>
+<pre>
+# W3C Mobile Web course specific configuration
+location        /w3c/mobile/week6/step2 {
+
+ if ($http_cookie ~ "v=m") {
+  rewrite ^([^~]*)\.(html|jpg|jpeg)$ $1~mobile.$2 last;
+ }
+
+ if ($http_cookie ~ "v=t") {
+  rewrite ^([^~]*)\.(html|jpg|jpeg)$ $1~tablet.$2 last;
+ }
+
+ if ($http_cookie ~ "v=d") {
+  break;
+ }
+
+ if ($http_user_agent ~* "android|blackberry|iphone|ipod|opera mini|avantgo|blazer|elaine|hiptop|palm|plucker|xiino|windows ce; (iemobile|ppc|smartphone)|kindle|mobile|mmp|midp|o2|pda|pocket|psp|symbian|smartphone|treo|up.browser|up.link|vodafone|wap") {
+  rewrite ^([^~]*)\.(html|jpg|jpeg)$ $1~mobile.$2 last;
+ }
+
+ if ($http_user_agent ~* "tablet|ipad") {
+  rewrite ^([^~]*)\.(html|jpg|jpeg)$ $1~tablet.$2 last;
+ }
+}
+</pre>
+
+<a href="step2/">Web page after step 2</a>
+
+<h2>Final step: Apply to Beethoven</h2>
+
+<p>I adapted my Beethoven page from assignment 2D. I removed the media queries and created 3 HTML files from it.</p>
+
+<p>Usage of the files in the <a href="final/">final step directory</a>:</p>
+<table border="1">
+  <thead>
+    <tr><th>Resource</th><th>Mobile</th><th>Tablet</th><th>Desktop</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>We page</td><td><tt>sample~mobile.html</tt></td><td><tt>sample~tablet.html</tt></td><td><tt>sample.html</tt></td></tr>
+    <tr><td>Stylesheet</td><td><tt>sample~mobile.html</tt> (referenced by style-mobile.css)</td><td><tt>sample~tablet.html</tt> (referenced by style-tablet.css)</td><td><tt>style-desktop.css</tt> (referenced by sample.html)</td></tr>
+    <tr><td>Music icon</td><td><tt>music.gif</tt></td><td><tt>music.gif</tt></td><td><tt>music.gif</tt></td></tr>
+    <tr><td>Beethoven picture</td><td><tt>beethoven~mobile.jpg</tt> (small)</td><td><tt>beethoven~tablet.jpg</tt> (medium)</td><td><tt>beethoven.jpg</tt> (big)</td></tr>
+    <tr><td>Background</td><td><tt>beethoven-background~mobile.jpg</tt> (small)</td><td><tt>beethoven-background~tablet.jpg</tt> (medium)</td><td><tt>beethoven-background.jpg</tt> (big)</td></tr>
+  </tbody>
+</table>
+<p>HTML page and JPEG pictures have different 3 versions, depending on the cookie value.</p>
+<p>The <tt>.css</tt> and <tt>.gif</tt> files are not concerned by the rule configured in Nginx, they are served traditionally.</p>
+
+<a href="final/sample.html">Web page final version</a>
+
+</body>
+
+</html>
