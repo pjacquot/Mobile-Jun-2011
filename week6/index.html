@@ -7,13 +7,13 @@
 
 <body>
 
-<p>Mobile Jun 2011 - <strong>Weeks 6 Assignment</strong></p>
+<p>Mobile Jun 2011 - <strong>Week 6 Assignment</strong></p>
 
 <p><strong>Student:</strong> pjacquot - Patrice Jacquot</p>
 
 <h1>Assignment: Theme and Variations</h1>
 
-<p>The purpose of this assignement is to create different versions of a page and use server side techniques to effect the switch between them.</p>
+<p>The purpose of this assignment is to create different versions of a page and use server side techniques to effect the switch between them.</p>
 
 <p>I choosed to support 3 versions: Mobile, Tablet and Desktop. The table below shows my classification of those 3 versions.</p>
 <table border="1">
@@ -129,7 +129,71 @@ location        /w3c/mobile/week6/step2 {
 <p>HTML page and JPEG pictures have different 3 versions, depending on the cookie value.</p>
 <p>The <tt>.css</tt> and <tt>.gif</tt> files are not concerned by the rule configured in Nginx, they are served traditionally.</p>
 
-<a href="final/sample.html">Web page final version</a>
+<a href="final/sample.html">Web page <del>final</del> version</a>
+
+<h2>One more step: Try to use ETag</h2>
+
+<p>After first assignement submission, I read a very interresting <a href="http://blog.yoav.ws/2011/07/Responsive-images---hacks-won-t-cut-it#comment-263593071">comment by Steve Souders</a>
+suggesting to use <tt>Vary: ETag</tt> to allow caching when serving different versions of the same resource from the same URI through a proxy.
+It appears that <tt>Vary: Etag</tt> is not correct because <tt>Etag</tt> is a server's response header, while <tt>Vary</tt> can only apply to client request headers,
+So I choosed to try with <tt>Vary: If-None-Math</tt>. It seems to work well, but I have still to confirm it by some tests behind a proxy.</p>
+
+<p>All the files are stricly the same, only server configuration has changed, it is now the following:</p>
+<pre>
+# W3C Mobile Web course specific configuration
+location        ~ /w3c/mobile/week6/etag {
+ autoindex on;
+ if_modified_since off;
+
+ set    $mode   none;
+ if ($cookie_v ~ "^m|t|d$") {
+  set   $mode   $cookie_v;
+ }
+
+ if ($http_If_None_Match = $mode) {
+  return 304;
+ }
+
+ if ($cookie_v = m) {
+  add_header    Vary If-None-Match;
+  add_header    ETag m;
+  rewrite ^([^~]*)\.(html|jpg|jpeg)$ $1~mobile.$2 last;
+  break;
+ }
+
+ if ($cookie_v = t) {
+  add_header    Vary If-None-Match;
+  add_header    ETag t;
+  rewrite ^([^~]*)\.(html|jpg|jpeg)$ $1~tablet.$2 last;
+  break;
+ }
+
+ if ($cookie_v = d) {
+  add_header    Vary If-None-Match;
+  add_header    ETag d;
+  break;
+ }
+
+ if ($http_user_agent ~* "android|blackberry|iphone|ipod|opera mini|avantgo|blazer|elaine|hiptop|palm|plucker|xiino|windows ce; (iemobile|ppc|smartphone)|kindle|mobile|mmp|midp|o2|pda|pocket|psp|symbian|smartphone|treo|up.browser|up.link|vodafone|wap") {
+  add_header    Vary If-None-Match;
+  add_header    ETag m;
+  rewrite ^([^~]*)\.(html|jpg|jpeg)$ $1~mobile.$2 last;
+  break;
+ }
+
+ if ($http_user_agent ~* "tablet|ipad") {
+  add_header    Vary If-None-Match;
+  add_header    ETag t;
+  rewrite ^([^~]*)\.(html|jpg|jpeg)$ $1~tablet.$2 last;
+  break;
+ }
+
+ add_header     Vary If-None-Match;
+ add_header     ETag d;
+}
+</pre>
+
+<a href="etag/sample.html">Web page with ETag version</a>
 
 </body>
 
