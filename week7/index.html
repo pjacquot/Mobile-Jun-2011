@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+<title>Mobile Jun 2011 - Week 7 Assignment (Patrice Jacquot)</title>
+</head>
+
+<body>
+
+<p>Mobile Jun 2011 - <strong>Week 7 Assignment</strong></p>
+
+<p><strong>Student:</strong> pjacquot - Patrice Jacquot</p>
+
+<h1>Assignment: Enhanced Progression</h1>
+
+<p>For this assignment, I will create a web application. It must adapt to various contexts and at least use Web Storage, and work offline.</p>
+
+<h2>Project's purpose</h2>
+
+<p>Every monday evening, colleagues and myself go play badminton. As the organizer of these recurrent events, I have to take Google Spreadsheet</p>
+
+<h2>Step 1: CouchDB installation and tests</h2>
+
+<p>CouchDB </p>
+
+<p>To install and start CouchDB on my Debian 6.0, I have only to type this command:</p>
+<pre>
+apt-get install couchdb
+</pre>
+
+<p>Then, I added the following configuration directive in Nginx (as explained in <a href="http://wiki.apache.org/couchdb/Nginx_As_a_Reverse_Proxy">nginx as a Reverse Proxy</a>):</p>
+<pre>
+# CouchDB
+location        ~ /cdb {
+ rewrite        ^/cdb/(.*)$ /$1 break;
+ proxy_pass     http://localhost:5984;
+ proxy_redirect off;
+ proxy_set_header Host $host;
+ proxy_set_header X-Real-IP $remote_addr;
+ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+ proxy_set_header X-Forwarded-Ssl on;
+}
+</pre>
+<p>Now, access to the CouchDB API is accessible from <a href="https://patj.eu/cdb/">https://patj.eu/cdb/</a></p>
+
+<p>Using CouchDB manager, I created this database for the experiments of the first step: <a href="https://patj.eu/cdb/w3c-mobile-step1/"></a></p>
+
+</body>
+
+</html>
