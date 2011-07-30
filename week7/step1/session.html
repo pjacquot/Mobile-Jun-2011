@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Badminton</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="stylesheet" href="style-1.css"/>
+  <script src="logic-1.js" async defer></script>
+</head>
+
+<body>
+
+<a class="header" href="list.html">Badminton</a>
+
+<h1>29 August 2011</h1>
+
+<form>
+
+<fieldset class="fields">
+  <legend>Fields (<span id="fieldCount">2</span>)</legend>
+  <div style="float:right">
+    <button type="submit" class="action supersize" onclick="return addFields()">+</button>
+    <button type="submit" class="action supersize" onclick="return removeField()">-</button>
+  </div>
+  <div id="fields">
+    <span class="imgbig-2-1 field"></span>
+    <span class="imgbig-2-1 field"></span>
+  </div>
+</fieldset>
+
+<fieldset>
+<legend>Players (<span id="playerCount">5</span>)</legend>
+
+<div style="float:right">
+  <label for="players">Select:</label>
+  <br/>
+
+  <select id="selectPlayers" multiple style="min-height:5em" size="7" onchange="updatePlayers()">
+    <option value="RKE" selected>Rudy</option>
+    <option value="CDE" selected>Cécile</option>
+    <option value="MAC" selected>Matthieu</option>
+    <option value="ODE" selected>Olivier</option>
+    <option value="KFO" selected>Katia</option>
+    <option value="FDE">François</option>
+    <option value="RKZ">Régis</option>
+  </select>
+</div>
+
+<div id="players" class="players">
+  <span class="imgbig player" data-player-id="RKE"><br/><br/><br/><br/><br/><br/>Rudy</span>
+  <span class="imgbig player" data-player-id="CDE"><br/><br/><br/><br/><br/><br/>Cécile</span>
+  <span class="imgbig player" data-player-id="MAC"><br/><br/><br/><br/><br/><br/>Matthieu</span>
+  <span class="imgbig player" data-player-id="ODE"><br/><br/><br/><br/><br/><br/>Olivier</span>
+  <span class="imgbig player" data-player-id="KFO"><br/><br/><br/><br/><br/><br/>Katia</span>
+</div>
+
+</fieldset>
+
+<br/>
+
+<div style="text-align:center">
+  <button type="submit" class="action supersize" onclick="return save()">Save</button>
+  <button type="submit" class="action supersize" onclick="document.reload(); return false">Cancel</button>
+</div>
+
+</form>
+
+</body>
+</html>
