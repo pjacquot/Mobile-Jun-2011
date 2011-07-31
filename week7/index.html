@@ -26,7 +26,7 @@ In this version graphics are designed, using media queries and SVG sprites.
 The JavaScript methods are basically implemented but without persistence nor server synchronization.
 The session does not correspond to </p>
 
-<p>At this time, the application is composed by the following files</p>
+<p>At this time, the application is composed by the following files:</p>
 <dl>
   <dt><a href="step1/list.html"><tt>list.html</tt></a></dt><dd>This is the list of badminton sessions</dd>
   <dt><a href="step1/session.html"><tt>session.html</tt></a></dt><dd>The details of a single session</dd>
@@ -36,7 +36,17 @@ The session does not correspond to </p>
 
 <a href="step1/list.html">Application after step 1</a>
 
-<h2>Step X: CouchDB installation and tests</h2>
+<h2>Step 2: Dynamically populate pages, hash-navigation and localStorage</h2>
+
+<p>The two html pages <tt>list.html</tt> and <tt>session.html</tt> are merged into a single <tt>index.html</tt> file.</p>
+<p>Thanks to the <tt>onhashchange</tt> event, we are able to detect URI changes while staying in the same webpage.
+When we navigate to a badminton session, we simply append a hashtag to the URL, for example <tt>#2011-09-05</tt> for 5 September 2011</p>
+<p>Because there is no remote database yet, the "Resync" button just clean the localStorage and stores two examples of badminton sessions.</p>
+<p>On save, changes are stored into the locastorage and retained even if the browser is restarted.</p>
+
+<a href="step2/">Application after step 2</a>
+
+<h2>Step 3: CouchDB installation and tests</h2>
 
 <p>CouchDB </p>
 

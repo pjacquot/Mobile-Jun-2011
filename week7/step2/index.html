@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Badminton</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="stylesheet" href="style-1.css"/>
+  <script src="logic-1.js" async defer></script>
+</head>
+
+<body onload="synchronize()">
+
+<a class="header" href="" onclick="return home()">Badminton</a>
+
+
+<div id="sync-mode">
+  <br/>
+  <br/>
+  <br/>
+  <h1>Sychronizing...</h1>
+</div>
+
+
+<div id="list-mode" style="display:none">
+  <form class="createnew">
+    <fieldset style="float:right">
+      <label for="newdate">Date:</label>
+      <input id="newdate" type="date" size="10" required></input>
+      <button type="submit" class="action" onclick="return createNew()">Create new</button><br/>
+    </fieldset>
+    <button type="submit" class="action resync" onclick="return resync()">Resync</button><br/>
+  </form>
+</div>
+
+
+<div id="edit-mode" style="display:none">
+  <h1 id="date"> </h1>
+
+  <form>
+    <fieldset class="fields">
+      <legend>Fields (<span id="fieldCount">2</span>)</legend>
+      <div style="float:right">
+        <button type="submit" class="action supersize" onclick="return addField()">+</button>
+        <button type="submit" class="action supersize" onclick="return removeField()">-</button>
+      </div>
+      <div id="fields">
+        <span class="imgbig-2-1 field"></span>
+        <span class="imgbig-2-1 field"></span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+    <legend>Players (<span id="playerCount">5</span>)</legend>
+
+    <div style="float:right">
+      <label for="players">Select:</label>
+      <br/>
+
+      <select id="selectPlayers" multiple style="min-height:5em" size="7" onchange="updatePlayers()">
+        <option value="RKE">Rudy</option>
+        <option value="CDE">Cécile</option>
+        <option value="MAC">Matthieu</option>
+        <option value="ODE">Olivier</option>
+        <option value="KFO">Katia</option>
+        <option value="FDE">François</option>
+        <option value="RKZ">Régis</option>
+      </select>
+    </div>
+
+    <div id="players" class="players">
+    </div>
+
+    </fieldset>
+
+    <br/>
+
+    <div style="text-align:center">
+      <button type="submit" class="action supersize" onclick="return save()">Save</button>
+      <button type="submit" class="action supersize" onclick="return cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
