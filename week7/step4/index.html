@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" manifest="badminton.appcache">
+
+<head>
+  <meta charset="utf-8">
+  <title>Badminton</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <link rel="stylesheet" href="style-1.css"/>
+  <script src="logic-1.js" async defer></script>
+</head>
+
+<body onload="init()">
+
+<a class="header" href="#" onclick="return home()"><span id="lastsync"> </span>Badminton</a>
+
+
+<div id="wait-mode">
+  <br/>
+  <br/>
+  <br/>
+  <h1 id="wait-message"> </h1>
+</div>
+
+
+<div id="list-mode" style="display:none">
+  <form class="createnew">
+    <fieldset style="float:right">
+      <label for="newdate">Date:</label>
+      <input id="newdate" type="date" size="10" required></input>
+      <button type="submit" class="action" onclick="return createNew()">Create new</button><br/>
+    </fieldset>
+    <button type="submit" class="action resync" onclick="return resync()">Resync</button><br/>
+  </form>
+</div>
+
+
+<div id="edit-mode" style="display:none">
+  <h1 id="date"> </h1>
+
+  <form>
+    <fieldset class="fields">
+      <legend>Fields (<span id="fieldCount"> </span>)</legend>
+      <div style="float:right">
+        <button type="submit" class="action supersize" onclick="return addField()">+</button>
+        <button type="submit" class="action supersize" onclick="return removeField()">-</button>
+      </div>
+      <div id="fields">
+        <span class="imgbig-2-1 field"></span>
+        <span class="imgbig-2-1 field"></span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+    <legend>Players (<span id="playerCount"> </span>)</legend>
+
+    <div style="float:right">
+      <label for="players">Select:</label>
+      <br/>
+      <select id="playersSelector" multiple style="min-height:5em" size="7" onchange="updatePlayers()">
+      </select>
+    </div>
+
+    <div id="players" class="players">
+    </div>
+
+    </fieldset>
+
+    <div class="buttons">
+      <button type="submit" class="action supersize" onclick="return save()">Save</button>
+      <button id="delete" type="submit" class="action supersize" onclick="return remove()">Delete</button>
+      <button type="submit" class="action supersize" onclick="return home()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
